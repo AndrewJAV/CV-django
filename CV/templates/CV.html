@@ -1,0 +1,94 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="gray-container">
+
+            <div class="circle-container profile-img-container">
+                <img src="{% static 'images/profile-image.jpg' %}" alt="profile-image" class="profile-img">
+            </div>
+
+            <section class="cv-section" id="about-me">
+                <h1 class="cv-section-title">SOBRE MÍ</h1>
+                <hr>
+                <p class="cv-section-description">{{person.description}}</p>
+            </section>
+
+            <section class="cv-section" id="contact">
+                <h1 class="cv-section-title">CONTACTO</h1>
+                <hr>
+                {% for contact in contacts %}
+                    <div class="contact-item">
+                        <div class="circle-container contact-icon-container">   
+                            <img src="{% static 'images/' %}{{ contact.kind }}.png" alt="Image" class="icon-img">
+                        </div>
+                        <p class="cv-section-subtitle"> {{contact.value}}</p>
+                    </div>
+                {% endfor %}
+            </section>
+            
+            <section class="cv-section" id="languages">
+                <h1 class="cv-section-title">IDIOMAS</h1>
+                <hr>
+                {% for language in languages %}
+                    <div class="languages-item">
+                        <p class="cv-section-subtitle"> {{language.name}}</p>
+                        <div class="bar-container"> 
+                            <div class="load-bar" style="width: {{language.proficiency}}%;"></div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </section>
+
+            <section class="cv-section" id="aptitudes">
+                <h1 class="cv-section-title">APTITUDES</h1>
+                <hr>
+                <ul class="list">
+                    {% for aptitude in aptitudes %}
+                        <li> {{aptitude.name}} </li>
+                    {% endfor %}
+                </ul>
+            </section>
+
+        </div>
+        <div class="white-container">
+            <section class="name-container">
+                <img src="{% static 'images/background-image.png' %}" alt="Background" class="background-img">
+                <h1 class="overlaid-text">{{person.name}}</h1>
+            </section>
+
+            <section class="cv-section" id="abilities">
+                <h1 class="cv-section-title">HABILIDADES</h1>
+                <hr>
+                <ul class="list">
+                    {% for skill in skills %}
+                        <li> {{skill.value}} </li>
+                    {% endfor %}
+                </ul>
+            </section>
+
+            <section class="cv-section" id="education">
+                <h1 class="cv-section-title">EDUCACIÓN</h1>
+                <hr>
+
+                {% for item in education %}
+                    <div class="education-item">
+                        <p class="education-item-title"> {{item.institution}}</p>
+                        <p class="education-item-desc">{{item.description}}</p>
+                        <p class="education-item-desc"> {{item.start_date}} - {{item.end_date}} | {{item.location}}</p>
+                    </div>
+                {% endfor %}
+            </section>
+        </div>
+    </div>
+</body>
+</html>
